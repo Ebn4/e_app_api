@@ -16,12 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('price');
-            $table->string('imageUrl');
-            $table->int('stock')->default(0);
+            $table->integer('stock')->default(0);
+            $table->string('imageUrl')->nullable();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
-        });
-        Schema::table('products', function (Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
